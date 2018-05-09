@@ -99,8 +99,28 @@ subset_nwm <- function(ind_file, model_configuration, comids, remake_file, gd_co
     }
   }
 
+  # need to loop through the sites because the dimensions in streamflow matrix were written incorrectly
+  for(s in 1:length(site_inds)) {
+    if(length(dimids) == 2) {
+      # Note axis order is assumed here!!!
+      ncvar_put(new_nc,
+                new_nc$var$streamflow,
+                streamflow[,s]*(1/new_nc$var$streamflow$scaleFact),  # need to multiply streamflow data by scale factor in nc var
+                start = c(s, 1),
+                count = c(1,-1))
+    } else if(length(dimids) == 3) {
+      for(r in 1:nc$dim$reference_time$len) {
+        ncvar_put(new_nc,
+                  new_nc$var$streamflow,
+                  streamflow[,s]*(1/new_nc$var$streamflow$scaleFact),  # need to multiply streamflow data by scale factor in nc var
+                  start = c(s, 1, r),
+                  count = c(1,-1, 1))
+      }
+    }
+  }
 
-  ncvar_put(new_nc, new_nc$var$streamflow, streamflow)
+
+  # ncvar_put(new_nc, new_nc$var$streamflow, streamflow)
 
   if("reference_time" %in% names(nc$dim)) {
     ncvar_put(new_nc, "reference_time", nc$dim$reference_time$vals)
