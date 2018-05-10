@@ -1,4 +1,4 @@
-apply_wrtds <- function(output_rds, eList, log_rds) {
+apply_wrtds <- function(output_rds, eList) {
 
   sys_time <- system.time({
     # Fit the WRTDS model

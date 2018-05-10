@@ -1,0 +1,14 @@
+version: 0.3.0
+name: 3_forecast/out/preds_wrtds.rds.ind
+type: file
+hash: b21b9dc6e4a41e9161bf59fa64639220
+time: 2018-05-10 03:29:27 UTC
+depends:
+  forecast_df: 6c8f1f67a71734f1b23a3b2efa9c5f5d
+  forecast_plan: b9fa07bf9ea1025ee6f074f8fee5bf55
+  lib/cfg/gd_config.yml: cf9c52868594c233f17a6f751a553018
+fixed: 49288f2c254d6d4237e2ad66a852c14f
+code:
+  functions:
+    gather_forecasts: 9d2e514d082a7529a9853e926ef084b8
+

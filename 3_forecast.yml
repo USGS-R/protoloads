@@ -11,7 +11,7 @@ targets:
 
   3_forecast:
     depends:
-      - 3_forecast/out/inputs.rds.ind
+      - 3_forecast_taskmaster_all
 
   # Targets prepared in 1_data.yml
   1_data/out/sites_subset.yml:
@@ -24,8 +24,18 @@ targets:
   # Targets prepared in 2_munge.yml
   2_munge/out/agg_nwis.rds:
     command: gd_get('2_munge/out/agg_nwis.rds.ind', config_file='lib/cfg/gd_config.yml')
-  2_munge/out/agg_nwm.rds:
-    command: gd_get('2_munge/out/agg_nwm.rds.ind', config_file='lib/cfg/gd_config.yml')
+  2_munge/out/agg_nwm_retro.rds:
+    command: gd_get('2_munge/out/agg_nwm_retro.rds.ind', config_file='lib/cfg/gd_config.yml')
+  2_munge/out/agg_nwm_med.rds:
+    command: gd_get('2_munge/out/agg_nwm_med.rds.ind', config_file='lib/cfg/gd_config.yml')
+  2_munge/out/agg_nwm_long1.rds:
+    command: gd_get('2_munge/out/agg_nwm_long1.rds.ind', config_file='lib/cfg/gd_config.yml')
+  2_munge/out/agg_nwm_long2.rds:
+    command: gd_get('2_munge/out/agg_nwm_long2.rds.ind', config_file='lib/cfg/gd_config.yml')
+  2_munge/out/agg_nwm_long3.rds:
+    command: gd_get('2_munge/out/agg_nwm_long3.rds.ind', config_file='lib/cfg/gd_config.yml')
+  2_munge/out/agg_nwm_long4.rds:
+    command: gd_get('2_munge/out/agg_nwm_long4.rds.ind', config_file='lib/cfg/gd_config.yml')
 
   # Use 3_forecast_taskmaster.yml to run all the models, then gather up and post
   # the output. When all this is complete, we get back the data file[s] below.
@@ -33,8 +43,5 @@ targets:
   # to ensure that 3_forecast/log/preds_rloadest.rds.ind gets built the first time. I think/hope
   # that after it's built, the recipe for 3_forecast/log/preds_rloadest.rds will notice if the
   # contents change...but this needs some monitoring to see whether I've got it right.
-  preds_rloadest:
-    command: scmake(I('3_forecast/log/preds_rloadest.rds.ind'), remake_file='3_forecast_taskmaster.yml')
-  3_forecast/log/preds_rloadest.rds:
-    depends: preds_rloadest
-    command: gd_get('3_forecast/log/preds_rloadest.rds.ind', config_file='lib/cfg/gd_config.yml')
+  3_forecast_taskmaster_all:
+    command: scmake(I('3_forecast_taskmaster'), remake_file='3_forecast_taskmaster.yml')

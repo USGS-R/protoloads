@@ -10,3 +10,4 @@ lib/cfg/gd_config.yml
 */in/*
 !*/in/*.ind
 *_tasks.yml
+*/tmp/*

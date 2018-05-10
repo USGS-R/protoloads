@@ -1,4 +1,4 @@
-apply_loadest <- function(output_rds, eList, log_rds) {
+apply_loadest <- function(output_rds, eList) {
 
   # Define a lookup table for translating INFO$param.units to conc.units
   units_lookup <- c('mg/l as N'='mg/L')

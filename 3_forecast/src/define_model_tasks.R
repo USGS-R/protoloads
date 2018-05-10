@@ -89,9 +89,8 @@ plan_forecasts <- function(
     command = function(task_name, ...) {
       psprintf(
         "apply_loadest(",
-        "output_ind=target_name,",
-        "eList=inputs_%s,"=task_name,
-        "log_ind=I('%s/loadest_%s.rds'))"=c(folders$log, task_name))
+        "output_rds=target_name,",
+        "eList=inputs_%s)"=task_name)
     }
   )
 
@@ -103,9 +102,8 @@ plan_forecasts <- function(
     command = function(task_name, ...) {
       psprintf(
         "apply_wrtds(",
-        "output_ind=target_name,",
-        "eList=inputs_%s,"=task_name,
-        "log_ind=I('%s/wrtds_%s.rds'))"=c(folders$log, task_name))
+        "output_rds=target_name,",
+        "eList=inputs_%s)"=task_name)
     }
   )
 
@@ -122,7 +120,7 @@ create_forecast_makefile <- function(makefile, task_plan, remake_file) {
   create_task_makefile(
     makefile=makefile, task_plan=task_plan,
     include=remake_file,
-    packages=c('dplyr', 'scipiper'),
+    packages=c('doParallel', 'dplyr', 'EGRET', 'rloadest', 'scipiper', 'survival'),
     sources=c(
       '3_forecast/src/prep_inputs.R',
       '3_forecast/src/apply_loadest.R',

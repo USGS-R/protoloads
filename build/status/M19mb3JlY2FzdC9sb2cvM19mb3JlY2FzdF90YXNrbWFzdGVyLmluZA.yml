@@ -1,0 +1,12 @@
+version: 0.3.0
+name: 3_forecast/log/3_forecast_taskmaster.ind
+type: file
+hash: 547925af8b2146d5581b3c1d0f647a08
+time: 2018-05-10 03:05:17 UTC
+depends:
+  3_forecast/out/preds_loadest.rds.ind: 0dec09af1ef78811b55fcfd5e3986ec1
+  3_forecast/out/preds_wrtds.rds.ind: b21b9dc6e4a41e9161bf59fa64639220
+fixed: ce0d0e039978f50802743e3747480e88
+code:
+  functions: {}
+
