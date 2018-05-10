@@ -24,8 +24,18 @@ targets:
   # Targets prepared in 2_munge.yml
   2_munge/out/agg_nwis.rds:
     command: gd_get('2_munge/out/agg_nwis.rds.ind', config_file='lib/cfg/gd_config.yml')
-  2_munge/out/agg_nwm.rds:
-    command: gd_get('2_munge/out/agg_nwm.rds.ind', config_file='lib/cfg/gd_config.yml')
+  2_munge/out/agg_nwm_retro.rds:
+    command: gd_get('2_munge/out/agg_nwm_retro.rds.ind', config_file='lib/cfg/gd_config.yml')
+  2_munge/out/agg_nwm_med.rds:
+    command: gd_get('2_munge/out/agg_nwm_med.rds.ind', config_file='lib/cfg/gd_config.yml')
+  2_munge/out/agg_nwm_long1.rds:
+    command: gd_get('2_munge/out/agg_nwm_long1.rds.ind', config_file='lib/cfg/gd_config.yml')
+  2_munge/out/agg_nwm_long2.rds:
+    command: gd_get('2_munge/out/agg_nwm_long2.rds.ind', config_file='lib/cfg/gd_config.yml')
+  2_munge/out/agg_nwm_long3.rds:
+    command: gd_get('2_munge/out/agg_nwm_long3.rds.ind', config_file='lib/cfg/gd_config.yml')
+  2_munge/out/agg_nwm_long4.rds:
+    command: gd_get('2_munge/out/agg_nwm_long4.rds.ind', config_file='lib/cfg/gd_config.yml')
 
   # Use 3_forecast_taskmaster.yml to run all the models, then gather up and post
   # the output. When all this is complete, we get back the data file[s] below.
@@ -38,3 +48,4 @@ targets:
   3_forecast/log/preds_rloadest.rds:
     depends: preds_rloadest
     command: gd_get('3_forecast/log/preds_rloadest.rds.ind', config_file='lib/cfg/gd_config.yml')
+    command: scmake(I('3_forecast_taskmaster'), remake_file='3_forecast_taskmaster.yml')
